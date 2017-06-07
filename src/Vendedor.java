@@ -6,7 +6,7 @@ public class Vendedor implements Serializable{
 	
 	public String nome;
 	public String codigo;
-	public static float comissao = 5;
+	public static float comissao = 1;
 	public String endereco;
 
 

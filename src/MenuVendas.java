@@ -10,7 +10,6 @@ public class MenuVendas {
 		return opt;
 	}
 	
-
 	public void setOpt(int opt) {
 		this.opt = opt;
 	}
@@ -34,12 +33,13 @@ public class MenuVendas {
 		try{
 		setOpt(leitor.nextInt());
 		}catch (InputMismatchException e) {
-			System.out.println("Opcao invalida!!");
+			System.out.println("Digite apenas números!!");
 		}
 		return opt;
 	}
 	
 	public int menu2(){
+		vassourinha();
 		System.out.println("------------------------------------------\n");
 		System.out.println("1 - Menu Principal");
 		System.out.println("\n2 - Novo registro");

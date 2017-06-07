@@ -75,8 +75,6 @@ public class Produto implements Serializable {
 		} catch (InputMismatchException e) {
 			System.out.println("Valor invalido!!");
 			novoProduto.setValorVenda(0);
-		} finally {
-			System.out.println("Valor alterado para o padrao.");
 		}
 		
 		System.out.println("\n1 - Produto com desconto \n2 - Produto sem desconto");
@@ -91,7 +89,6 @@ public class Produto implements Serializable {
 			System.out.println("Valor invalido!!");
 		}
 		
-		leitor.close();
 			
 		return novoProduto;
 	}
@@ -100,7 +97,7 @@ public class Produto implements Serializable {
 		
 		System.out.println("\n------------Informacoes------------\n");
 		System.out.println("- Codigo:" + produto.getCodProduto());
-		System.out.println("\n- Descricao do Protudo:" + produto.getDescProduto());
+		System.out.println("\n- Descricao do Produto:" + produto.getDescProduto());
 		System.out.println("\n- Valor de venda: " + produto.getValorVenda());
 		System.out.println("\n- Valor de compra (custo): " + produto.getValorCusto());
 		System.out.println("\n- Status: ");

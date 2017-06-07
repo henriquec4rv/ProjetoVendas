@@ -8,13 +8,7 @@ public class Venda implements Serializable{
 	public ArrayList<Produto> produtos = new ArrayList<>();
 	public Vendedor vendedor;
 	int aux = 0, i = 0, quantidadeItens, quantidadeItensFinal;
-	float desconto, valorComissaoFinal, valorFinal, valor, valorComissao;
-	
-	ArqMan arq = new ArqMan();
-	MenuVendas menuFuncs = new MenuVendas();
-	
-	Scanner leitor = new Scanner(System.in);
-	Scanner leitor2 = new Scanner(System.in);
+	float desconto = 2, valorComissaoFinal, valorFinal, valor, valorComissao;	
 	
 	public ArrayList<Produto> getProdutos() {
 		return produtos;
@@ -81,9 +75,12 @@ public class Venda implements Serializable{
 		this.quantidadeItensFinal = quantidadeItensFinal;
 	}
 	
-	
-	
 	public Venda registrarVenda(Venda venda) {
+	
+		ArqMan arq = new ArqMan();
+		MenuVendas menuFuncs = new MenuVendas();
+		Scanner leitor = new Scanner(System.in);
+		Scanner leitor2 = new Scanner(System.in);
 		
 		System.out.println("\n- Codigo do vendedor: ");
 		venda.setVendedor((Vendedor) arq.lerObjeto("vendedores/" + leitor.nextLine()));
@@ -105,11 +102,11 @@ public class Venda implements Serializable{
 			venda.quantidadeItensFinal += venda.quantidadeItens;
 			
 			menuFuncs.vassourinha();
-			System.out.println("Digite 0 para adicionar mais produtos ou qualquer outro valor para sair!!");
+			System.out.println("Para continuar, digite zero. Para sair, digite qualquer outro número!");
 			aux = leitor2.nextInt();
 			
 		}
-
+		
 		return venda;
 	}
 
@@ -127,7 +124,7 @@ public class Venda implements Serializable{
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			
 			System.out.println("Erro ao efetuar desconto!!");
 		} finally {
 			System.out.println("");
@@ -137,7 +134,7 @@ public class Venda implements Serializable{
 
 	public float calcularValor(){
 		
-		this.valor = (this.produtos.get(i).getValorCusto() - this.desconto) * this.quantidadeItens;
+		this.valor = (this.produtos.get(i).getValorVenda() - this.desconto) * this.quantidadeItens;
 		if (produto.getValorVenda()<0){
 			throw new PersonalExcept("Valor invalido!!");
 		}
@@ -148,12 +145,12 @@ public class Venda implements Serializable{
 	public float calcularComissao(){
 		
 		if(this.produto.promocao == true){
-			valorComissao = ((this.vendedor.getComissao() / 100) * getValor() / 2);
+			this.valorComissao = ((this.vendedor.getComissao() / 100) * getValor() / 2);
 		} else {
-			valorComissao = ((this.vendedor.getComissao() / 100) * getValor());
+			this.valorComissao = ((this.vendedor.getComissao() / 100) * getValor());
 		}
 		if(valorComissao < 0) {
-			throw new PersonalExcept("Valor invalido para a comissao!!");
+			throw new PersonalExcept("Valor invalido para a comissao!!");	
 		}
 		
 		return valorComissao;
@@ -165,7 +162,7 @@ public class Venda implements Serializable{
 		System.out.println("---------------------------Dados da Venda---------------------------");
 		try{
 			do{
-				System.out.println("\n- Cod. Produto:" + produtos.get(i).getCodProduto() + "\n- Desc. Produto:" + produtos.get(i).getDescProduto() + "\n- Valor/unidade: R$" + produtos.get(i).getValorCusto());
+				System.out.println("\n- Cod. Produto:" + produtos.get(i).getCodProduto() + "\n- Desc. Produto:" + produtos.get(i).getDescProduto() + "\n- Valor/unidade: R$" + produtos.get(i).getValorVenda());
 				i++;
 			} while(venda.getProdutos().get(i) != null);
 		} catch (IndexOutOfBoundsException e) {
